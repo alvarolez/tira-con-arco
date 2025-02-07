@@ -1242,6 +1242,39 @@
 							</div>
 						</div>
 
+						<script>
+			
+			const scriptURL = "https://script.google.com/macros/s/AKfycbzuU7XyGvTLbCR4Wzy6AhKST9G2zpNE4mN_ZI8LoBbpdIb5JQybjELuVb-SIK2ZL84GMA/exec";
+const TOKEN_SEGURO = "kvcf2fn04wotzolesPADLIrIZRVfM0Gvysi5g6AiBe33D4uzvjt2CjEUstiiwaEJ"; 
+
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+    
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+
+    // Enviar como parámetros en la URL (GET)
+    const url = `${scriptURL}?nombre=${encodeURIComponent(name)}&whatsapp=${encodeURIComponent(phone)}&token=${TOKEN_SEGURO}`;
+
+    fetch(url, {
+        method: "GET"
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.result === "Registro exitoso") {
+            alert("Registro exitoso. ¡Gracias por unirte!");
+            document.getElementById("registerForm").reset();
+            document.getElementById("myModal").style.display = "none";
+        } else {
+            alert("Error: " + data.error);
+        }
+    })
+    .catch(error => {
+        alert("Error al enviar los datos. Intenta de nuevo.");
+        console.error("Error:", error);
+    });
+});			</script>
+
 						<style>
 							/* El modal (ventana emergente) */
 							.modal {
